@@ -1864,6 +1864,17 @@ CMD_FUNC(m_user)
 
 	if (parc > 2 && (username = (char *)index(parv[1], '@')))
 		*username = '\0';
+	// ipv6 ::1 hack
+	if (parc == 4 && strstr(parv[3]," :"))
+	{
+		char *s=strstr(parv[3]," :")+2;
+		parv[4] = malloc(strlen(s)+1);
+		strcpy(parv[4],s);
+		s = strchr(parv[3],' ');
+		if (s) s[0] = 0; 
+		parc = 5;
+	}
+	// end of ::1 hack  
 	if (parc < 5 || *parv[1] == '\0' || *parv[2] == '\0' ||
 	    *parv[3] == '\0' || *parv[4] == '\0')
 	{

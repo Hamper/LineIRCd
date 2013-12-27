@@ -173,9 +173,10 @@ char mydummy2[MYDUMMY_SIZE];
 # endif
 
 # if defined(linux)
-static const struct in6_addr in6addr_any = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+/* static const struct in6_addr in6addr_any = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0
-};
+ };*/
+ extern const struct in6_addr in6addr_any;
 
 # endif
 
