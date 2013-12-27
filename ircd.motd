@@ -1,0 +1,28 @@
+============================================================
+Добро пожаловать в IRCLine.RU!
+Welcome to IRCLine.RU!
+
+Port encoding:
+6665 - UTF-8 (Russian and english only)
+6666 - IBM866 (DOS)
+6667 - CP1251 (Windows)
+6668 - KOI8-R
+6669 - ISO-8859-5 (Macintosh)
+
+Port encoding (SSL):
+6695 - Secured (SSL) UTF-8 (Russian and english only)
+6696 - Secured (SSL) IBM866 (DOS)
+6697 - Secured (SSL) CP1251 (Windows)
+6698 - Secured (SSL) KOI8-R
+6699 - Secured (SSL) ISO-8859-5 (Macintosh)
+
+За помощью по IRC обращайтесь на канал #help
+С жалобами и предложениями обращайтесь на канал #abuse
+Официальный канал сети для разговоров: #ircline.ru
+
+Правила сети доступны по команде /rules
+
+Сайт сети: http://www.ircline.ru
+Форум: http://forum.ircline.ru
+Фотогалерея: http://gallery.ircline.ru
+============================================================
