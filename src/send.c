@@ -257,6 +257,10 @@ void vsendto_one(aClient *to, char *pattern, va_list vl)
  *   if quick is >0 it is assumed the message has \r\n and 'quick' is used
  *   as length. Of course you should be very careful with that.
  */
+
+//#define TRMSG_SIZE 32768
+char trmsg[32768+1];
+
 void sendbufto_one(aClient *to, char *msg, unsigned int quick)
 {
 	int  len;
@@ -328,12 +332,19 @@ void sendbufto_one(aClient *to, char *msg, unsigned int quick)
 	** send_queued is then responsible to never let the sendQ
 	** be empty and to->zip->outbuf not empty.
 	*/
-	if (IsZipped(to))
+	if (IsZipped(to)) {
 		msg = zip_buffer(to, msg, &len, 0);
-	
-	if (len && !dbuf_put(&to->sendQ, msg, len))
+        strncpy(trmsg, msg, len);
+    }
+    else {
+        strncpy(trmsg, msg, len);
+        len = chcodepage(trmsg, 0, to->codepage, len);
+    }
+	if (len && !dbuf_put(&to->sendQ, trmsg, len))
 #else
-	if (!dbuf_put(&to->sendQ, msg, len))
+	strncpy(trmsg, msg, len);
+	len = chcodepage(trmsg, 0, to->codepage, len);
+	if (!dbuf_put(&to->sendQ, trmsg, len))
 #endif
 	{
 		dead_link(to, "Buffer allocation error");

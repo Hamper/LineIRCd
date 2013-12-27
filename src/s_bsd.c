@@ -2970,7 +2970,8 @@ int my_send(aClient *cptr, char *msg, unsigned int len, int flags) {
 		if (len < TRMSG_SIZE/3) {
 			int newlen;
 			strncpy(trmsg, msg, len);
-			newlen = chcodepage(trmsg, 0, cptr->codepage, len);
+			//chcodepage in send.c "void sendbufto_one" -> dbuf_put
+			newlen = len ;//chcodepage(trmsg, 0, cptr->codepage, len);
 			return(send(cptr->fd, trmsg, newlen, flags));
 		} else {
 			ircd_log(LOG_ERROR, "[Debug] (my_send) len: %d; TRMSG_SIZE: %d; msg: %s", len, TRMSG_SIZE, msg);
@@ -2991,7 +2992,8 @@ int my_ircd_SSL_write(aClient *cptr, char *msg, unsigned int len) {
 		if (len < TRMSG_SIZE/3) {
 			int newlen;
 			strncpy(trmsg, msg, len);
-			newlen = chcodepage(trmsg, 0, cptr->codepage, len);
+			//chcodepage in send.c "void sendbufto_one" -> dbuf_put
+			newlen = len; //chcodepage(trmsg, 0, cptr->codepage, len);
 			return(SSL_write((SSL *)cptr->ssl, trmsg, newlen));
 		} else {
 			ircd_log(LOG_ERROR, "[Debug] (my_ircd_SSL_write) len: %d; TRMSG_SIZE: %d; msg: %s", len, TRMSG_SIZE, msg);
