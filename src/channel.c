@@ -3876,7 +3876,8 @@ CMD_FUNC(do_join)
 			 */
 
 			flags =
-			    (ChannelExists(name)) ? CHFL_DEOPPED : CHFL_CHANOP;
+			    (ChannelExists(name)) ? CHFL_DEOPPED : 
+                ((find_server_quick(SERVICES_NAME)) ? CHFL_DEOPPED : CHFL_CHANOP);
 
 			if (!OPIsNoChanLimit(sptr)) {	/* opers can join unlimited chans */
 				int maxchannels = MAXCHANNELSPERUSER;
