@@ -1642,6 +1642,9 @@ struct liststruct {
 #define	ShowChannel(v,c)	(PubChannel(c) || IsMember((v),(c)))
 #define	PubChannel(x)		((!x) || ((x)->mode.mode &\
 				 (MODE_PRIVATE | MODE_SECRET)) == 0)
+#define	ShowChannel2(v,c)	(PubChannel2(c) || IsMember((v),(c)))
+#define	PubChannel2(x)		((!x) || ((x)->mode.mode &\
+				 (MODE_SECRET)) == 0)
 
 #define	IsChannelName(name) ((name) && (*(name) == '#'))
 

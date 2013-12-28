@@ -4245,14 +4245,14 @@ void send_list(aClient *cptr, int numsend)
 					sendto_one(cptr,
 					    rpl_str(RPL_LIST), me.name,
 					    cptr->name,
-					    ShowChannel(cptr,
+					    ShowChannel2(cptr,
 					    chptr) ? chptr->chname :
 					    "*", chptr->users_visible,
 #ifdef LIST_SHOW_MODES
-					    ShowChannel(cptr, chptr) ?
+					    ShowChannel2(cptr, chptr) ?
 					    modebuf : "",
 #endif
-					    ShowChannel(cptr,
+					    ShowChannel2(cptr,
 					    chptr) ? (chptr->topic ?
 					    chptr->topic : "") : "");
 				else
@@ -4419,7 +4419,7 @@ CMD_FUNC(m_names)
 
 	chptr = find_channel(para, (aChannel *)NULL);
 
-	if (!chptr || (!ShowChannel(sptr, chptr) && !IsAnOper(sptr)))
+	if (!chptr || (!ShowChannel2(sptr, chptr) && !IsAnOper(sptr)))
 	{
 		sendto_one(sptr, rpl_str(RPL_ENDOFNAMES), me.name,
 		    parv[0], para);
