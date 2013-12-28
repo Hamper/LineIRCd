@@ -288,6 +288,7 @@ static OperFlag _LogFlags[] = {
 static OperFlag _SSLFlags[] = {
 	{ SSLFLAG_FAILIFNOCERT, "fail-if-no-clientcert" },
 	{ SSLFLAG_DONOTACCEPTSELFSIGNED, "no-self-signed" },
+	{ SSLFLAG_NOSTARTTLS, "no-starttls" },
 	{ SSLFLAG_VERIFYCERT, "verify-certificate" },
 };
 #endif

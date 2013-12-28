@@ -120,6 +120,7 @@ extern int m_connect_Init(ModuleInfo *modinfo), m_dccallow_Init(ModuleInfo *modi
 extern int m_accept_Init(ModuleInfo *modinfo), m_svsaccept_Init(ModuleInfo *modinfo);
 extern int m_idreq_Init(ModuleInfo *modinfo), m_idreply_Init(ModuleInfo *modinfo);
 extern int m_nopost_Init(ModuleInfo *modinfo);
+extern int m_starttls_Init(ModuleInfo *modinfo);
 #ifdef GUEST
 extern int m_guest_Init(ModuleInfo *modinfo);
 #endif
@@ -165,6 +166,7 @@ extern int m_connect_Load(int module_load), m_dccallow_Load(int module_load);
 extern int m_accept_Load(int module_load), m_svsaccept_Load(int module_load);
 extern int m_idreq_Load(int module_load), m_idreply_Load(int module_load);
 extern int m_nopost_Load(int module_load);
+extern int m_starttls_Load(int module_load);
 #ifdef GUEST
 extern int m_guest_Load(int module_load);
 #endif
@@ -199,6 +201,7 @@ extern int m_whowas_Unload(), m_connect_Unload(), m_dccallow_Unload();
 extern int m_accept_Unload(), m_svsaccept_Unload();
 extern int m_idreq_Unload(), m_idreply_Unload();
 extern int m_nopost_Unload();
+extern int m_starttls_Unload();
 #ifdef GUEST
 extern int m_guest_Unload();
 #endif
@@ -326,6 +329,7 @@ int    l_commands_Init(ModuleInfo *modinfo)
 	m_idreq_Init(ModCmdsInfo);
 	m_idreply_Init(ModCmdsInfo);
 	m_nopost_Init(ModCmdsInfo);
+	m_starttls_Init(ModCmdsInfo);
 #ifdef GUEST
 	m_guest_Init(ModCmdsInfo);
 #endif
@@ -431,6 +435,7 @@ int    l_commands_Load(int module_load)
 	m_idreq_Load(module_load);
 	m_idreply_Load(module_load);
 	m_nopost_Load(module_load);
+	m_starttls_Load(module_load);
 #ifdef GUEST
 	m_guest_Load(module_load);
 #endif
@@ -536,6 +541,7 @@ int	l_commands_Unload(int module_unload)
 	m_idreq_Unload();
 	m_idreply_Unload();
 	m_nopost_Unload();
+	m_starttls_Unload();
 #ifdef GUEST
 	m_guest_Unload();
 #endif
