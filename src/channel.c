@@ -421,10 +421,10 @@ int add_exbanid(aClient *cptr, aChannel *chptr, char *banid)
 			  /* Temp workaround added in b19. -- Syzop */
 			  if (!mycmp(ban->banstr, banid) || (!strchr(banid, '\\') && !strchr(ban->banstr, '\\')))
 #ifdef NAZIISH_CHBAN_HANDLING
-				if (!match(ban->banstr, banid) ||
-				    !match(banid, ban->banstr))
+				if (!match_rus(ban->banstr, banid) ||
+				    !match_rus(banid, ban->banstr))
 #else
-				if (!match(ban->banstr, banid))
+				if (!match_rus(ban->banstr, banid))
 #endif
 					return -1;
 			}
@@ -496,10 +496,10 @@ int add_banid(aClient *cptr, aChannel *chptr, char *banid)
 			  /* Temp workaround added in b19. -- Syzop */
 			  if (!mycmp(ban->banstr, banid) || (!strchr(banid, '\\') && !strchr(ban->banstr, '\\')))
 #ifdef NAZIISH_CHBAN_HANDLING /* why does it do this?? */
-				if (!match(ban->banstr, banid) ||
-				    !match(banid, ban->banstr))
+				if (!match_rus(ban->banstr, banid) ||
+				    !match_rus(banid, ban->banstr))
 #else
-				if (!match(ban->banstr, banid))
+				if (!match_rus(ban->banstr, banid))
 #endif
 					return -1;
 			}
@@ -614,8 +614,8 @@ Ban *is_banned(aClient *sptr, aChannel *chptr, int type)
 			if (!extban->is_banned(sptr, chptr, tmp->banstr, type))
 				continue;
 		} else {
-			if ((match(tmp->banstr, realhost) == 0) ||
-			    (dovirt && (match(tmp->banstr, virthost) == 0)) ||
+			if ((match_rus(tmp->banstr, realhost) == 0) ||
+			    (dovirt && (match_rus(tmp->banstr, virthost) == 0)) ||
 			    (mine && (match(tmp->banstr, nuip) == 0)))
 			{
 				/* matches.. do nothing */
@@ -634,8 +634,8 @@ Ban *is_banned(aClient *sptr, aChannel *chptr, int type)
 				if (extban->is_banned(sptr, chptr, tmp2->banstr, type))
 					return NULL;
 			} else {
-				if ((match(tmp2->banstr, realhost) == 0) ||
-					(dovirt && (match(tmp2->banstr, virthost) == 0)) ||
+				if ((match_rus(tmp2->banstr, realhost) == 0) ||
+					(dovirt && (match_rus(tmp2->banstr, virthost) == 0)) ||
 					(mine && (match(tmp2->banstr, nuip) == 0)) )
 					return NULL;
 			}
@@ -656,11 +656,11 @@ static int is_irc_banned(aChannel *chptr)
 	char *check = "IRC!\001@\001";
 	
 	for (tmp = chptr->banlist; tmp; tmp = tmp->next)
-		if (match(tmp->banstr, check) == 0)
+		if (match_rus(tmp->banstr, check) == 0)
 		{
 			/* Ban found, now check for +e */
 			for (tmp = chptr->exlist; tmp; tmp = tmp->next)
-				if (match(tmp->banstr, check) == 0)
+				if (match_rus(tmp->banstr, check) == 0)
 					return 0; /* In exception list */
 			return 1;
 		}
@@ -3384,7 +3384,7 @@ int check_channelmask(aClient *sptr, aClient *cptr, char *chname)
 		return 0;
 
 	s++;
-	if (match(s, me.name) || (IsServer(cptr) && match(s, cptr->name)))
+	if (match_rus(s, me.name) || (IsServer(cptr) && match_rus(s, cptr->name)))
 	{
 		if (MyClient(sptr))
 			sendto_one(sptr, err_str(ERR_BADCHANMASK),
@@ -4517,7 +4517,7 @@ void send_user_joins(aClient *cptr, aClient *user)
 	{
 		chptr = lp->chptr;
 		if ((mask = index(chptr->chname, ':')))
-			if (match(++mask, cptr->name))
+			if (match_rus(++mask, cptr->name))
 				continue;
 		if (*chptr->chname == '&')
 			continue;

@@ -181,8 +181,8 @@ char *ban = banin + 3;
 	if (type != BANCHK_MSG)
 		return 0;
 	
-	if ((ban_realhost && !match(ban, ban_realhost)) ||
-	     (ban_virthost && !match(ban, ban_virthost)) ||
+	if ((ban_realhost && !match_rus(ban, ban_realhost)) ||
+	     (ban_virthost && !match_rus(ban, ban_virthost)) ||
 	     (ban_ip && !match(ban, ban_ip)))
 		return 1;
 
@@ -196,8 +196,8 @@ char *ban = banin + 3;
 	if (type != BANCHK_NICK)
 		return 0;
 	
-	if ((ban_realhost && !match(ban, ban_realhost)) ||
-	     (ban_virthost && !match(ban, ban_virthost)) ||
+	if ((ban_realhost && !match_rus(ban, ban_realhost)) ||
+	     (ban_virthost && !match_rus(ban, ban_virthost)) ||
 	     (ban_ip && !match(ban, ban_ip)))
 		return 1;
 
@@ -253,7 +253,7 @@ static char retbuf[REALLEN + 8];
 int extban_moder_is_banned(aClient *sptr, aChannel *chptr, char *banin, int type)
 {
 char *ban = banin+3;
-	if (!match(ban, sptr->info))
+	if (!match_rus(ban, sptr->info))
 		return 1;
 	return 0;
 }
