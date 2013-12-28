@@ -25,7 +25,7 @@ INCLUDES = ../include/struct.h ../include/config.h \
 	../include/dynconf.h ../include/modules.h ../include/setup.h
 
 R_MODULES=cloak.so nocloak.so m_chgswhois.so m_privdeaf.so m_getinfo.so \
-	 m_nocodes.so noctcp.so
+	 m_nocodes.so noctcp.so m_nopost.so
 
 COMMANDS=m_sethost.c m_chghost.c m_chgident.c m_setname.c m_setident.c \
          m_sdesc.c m_svsmode.c m_swhois.c m_svsmotd.c m_svsnline.c \
@@ -45,7 +45,7 @@ COMMANDS=m_sethost.c m_chghost.c m_chgident.c m_setname.c m_setident.c \
 	 m_close.c m_map.c m_eos.c m_server.c m_stats.c \
 	 m_svsfline.c m_dccdeny.c m_undccdeny.c m_whowas.c \
 	 m_connect.c m_dccallow.c m_accept.c m_svsaccept.c \
-	 m_idreq.c m_idreply.c
+	 m_idreq.c m_idreply.c m_nopost.c
 
 
 MODULES=commands.so $(R_MODULES)
@@ -90,6 +90,10 @@ m_nocodes.so: m_nocodes.c $(INCLUDES)
 noctcp.so: noctcp.c $(INCLUDES)
 	$(CC) $(CFLAGS) $(MODULEFLAGS) -DDYNAMIC_LINKING \
 		-o noctcp.so noctcp.c
+
+m_nopost.so: m_nopost.c $(INCLUDES)
+	$(CC) $(CFLAGS) $(MODULEFLAGS) -DDYNAMIC_LINKING \
+		-o m_nopost.so m_nopost.c
 
 clean:
 	$(RM) -f *.o *.so *~ core
