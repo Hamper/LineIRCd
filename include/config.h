@@ -657,3 +657,7 @@ error You stuffed up config.h signals
 
 #endif				/* __config_include__ */
 
+/*
+ * Флаги +aq дают защиту от действия флага +f так же как при включенном PREFIX_AQ
+ */
+#define FLDADWPROT

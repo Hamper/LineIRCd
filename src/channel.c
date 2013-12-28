@@ -4300,8 +4300,13 @@ int  check_for_chan_flood(aClient *cptr, aClient *sptr, aChannel *chptr)
 		return 0;
 	if (IsOper(sptr) || IsULine(sptr))
 		return 0;
+#ifdef FLDADWPROT
+	if (is_chanownprotop(sptr, chptr))
+		return 0;
+#else
 	if (is_chan_op(sptr, chptr))
 		return 0;
+#endif
 
 	if (!(lp = find_membership_link(sptr->user->channel, chptr)))
 		return 0;
