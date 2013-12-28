@@ -175,7 +175,7 @@ CMD_FUNC(m_kick)
 					}
 				}
 				if (IsTotalInvis(who) && (who != sptr) && !IsAnOper(sptr) && !IsULine(sptr) && MyClient(sptr)) {
-					sendto_one(sptr, err_str(ERR_USERNOTINCHANNEL), me.name, parv[0], user, name);
+					sendto_one(sptr, err_str(ERR_USERNOTINCHANNEL), me.name, parv[0], user, chptr->chname);
 					sendto_one(who, ":%s NOTICE %s :*** Invisibility: %s tried to kick you from %s (%s)", me.name, who->name, parv[0], chptr->chname, comment);
 					break;
 				}
@@ -328,12 +328,12 @@ CMD_FUNC(m_kick)
 						/* NORMAL */
 						sendto_channel_butserv(chptr,
 						    sptr, ":%s KICK %s %s :%s",
-						    parv[0], name, who->name, comment);
+						    parv[0], chptr->chname, who->name, comment);
 					}
 				}
 				sendto_serv_butone_token(cptr, parv[0],
 				    MSG_KICK, TOK_KICK, "%s %s :%s",
-				    name, who->name, comment);
+				    chptr->chname, who->name, comment);
 				if (lp)
 				{
 					remove_user_from_channel(who, chptr);
@@ -342,7 +342,7 @@ CMD_FUNC(m_kick)
 			else if (MyClient(sptr))
 				sendto_one(sptr,
 				    err_str(ERR_USERNOTINCHANNEL),
-				    me.name, parv[0], user, name);
+				    me.name, parv[0], user, chptr->chname);
 			if (MyClient(cptr))
 				break;
 		}		/* loop on parv[2] */
