@@ -30,8 +30,8 @@
 #define PATCH1  		"3"
 #define PATCH2  		".2"
 #define PATCH3  		".1"
-#define PATCH4  		"-DalNetRU2.2.9.1"
-#define PATCH5  		"-Patch1"
+#define PATCH4  		"-DalNetRU2.3"
+#define PATCH5  		""
 #define PATCH6  		"-IRCLine.RU"
 #define PATCH7  		""
 #define PATCH8  		COMPILEINFO
