@@ -579,7 +579,7 @@ Ban *is_banned(aClient *sptr, aChannel *chptr, int type)
 
 	if (MyConnect(sptr)) {
 		mine = 1;
-		s = make_nick_user_host(sptr->name, sptr->user->username, sptr->user->ip_str);
+		s = make_nick_user_host(sptr->name, sptr->user->username, sptr->sockhost);
 		strlcpy(nuip, s, sizeof nuip);
 		ban_ip = nuip;
 	}
