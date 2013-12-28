@@ -2391,17 +2391,17 @@ int  do_mode_char(aChannel *chptr, long modetype, char modechar, char *param,
 		  {
 			  if (!*chptr->mode.link)
 				  break;	/* no change */
-			  strncpyzt(tmpbuf, chptr->mode.link, sizeof(tmpbuf));
-			  tmpstr = tmpbuf;
 			  if (!bounce)
 			  {
 				  strcpy(chptr->mode.link, "");
 			  }
 		  }
 		  retval = 1;
-
-		  (void)ircsprintf(pvar[*pcount], "%cL%s",
-		      what == MODE_ADD ? '+' : '-', tmpstr);
+          if (what == MODE_ADD) {
+		    (void)ircsprintf(pvar[*pcount], "%cL%s",'+', tmpstr);
+          } else {
+            (void)ircsprintf(pvar[*pcount], "%cL",'-');
+          }
 		  (*pcount)++;
 		  break;
 	  case MODE_FLOODLIMIT:
@@ -2751,21 +2751,21 @@ int  do_mode_char(aChannel *chptr, long modetype, char modechar, char *param,
 				break; /* no change */
 			if (!bounce)
 			{
-				strcpy(tmpbuf, channel_modef_string(chptr->mode.floodprot));
-				tmpstr = tmpbuf;
 				free(chptr->mode.floodprot);
 				chptr->mode.floodprot = NULL;
 				chanfloodtimer_stopchantimers(chptr);
 			} else {
 				/* bounce.. */
-				tmpstr = param;
 			}
 			retval = 0; /* ??? copied from previous +f code. */
 		}
 #endif
 
-		  (void)ircsprintf(pvar[*pcount], "%cf%s",
-		      what == MODE_ADD ? '+' : '-', tmpstr);
+          if (what == MODE_ADD) {
+		    (void)ircsprintf(pvar[*pcount], "%cf%s",'+', tmpstr);
+          } else {
+            (void)ircsprintf(pvar[*pcount], "%cf",'-');
+          }
 		  (*pcount)++;
 		  break_flood:
 		  break;
