@@ -2553,15 +2553,13 @@ static struct SOCKADDR *connect_inet(ConfigItem_link *aconf, aClient *cptr, int 
 		return NULL;
 	}
 	mysk.SIN_PORT = 0;
-	bzero((char *)&server, sizeof(server));
-	server.SIN_FAMILY = AFINET;
 	get_sockhost(cptr, aconf->hostname);
 	
-	server.SIN_PORT = 0;
-	server.SIN_ADDR = me.ip;
-	server.SIN_FAMILY = AFINET;
 	if (aconf->bindip && strcmp("*", aconf->bindip))
 	{
+               bzero((char *)&server, sizeof(server));
+               server.SIN_FAMILY = AFINET;
+               server.SIN_PORT = 0;
 #ifndef INET6
 		server.SIN_ADDR.S_ADDR = inet_addr(aconf->bindip);	
 #else
